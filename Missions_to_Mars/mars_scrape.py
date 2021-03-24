@@ -30,8 +30,7 @@ def image(browser):
     url = 'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html'
     browser.visit(url)
 
-    browser.click_link_by_partial_text('FULL IMAGE')
-    return browser.find_by_css('img.fancybox-image')['src']
+    return browser.find_by_css('a.showimg')['href']
 
 # ### Mars Facts
 # * Visit the Mars Facts webpage [here](https://space-facts.com/mars/) and use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
@@ -45,8 +44,6 @@ def pheres(browser):
     browser.visit(url)
 
     links = browser.find_by_css('a.itemLink h3')
-    browser.back()
-
     hemispheres = []
     for i in range(len(links)):
         hemisphere = {}
