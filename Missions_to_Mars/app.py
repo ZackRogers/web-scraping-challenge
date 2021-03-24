@@ -6,13 +6,13 @@ from mars_scrape import scrape
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-app.config["MONGO_URI"] = "mongodb://localhost:27017/phone_app"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_db"
 mongo = PyMongo(app)
 
 @app.route("/")
 def home(): 
      # Find data
-    mars_info = mongo.db.mars_info.find_one()
+    mars_info = mongo.db.mars.find_one()
 
     # Return template and data
     return render_template("index.html", mars=mars_info)
@@ -20,7 +20,7 @@ def home():
 @app.route('/scrape')
 def scrape_all():
     # Create mars info collection
-    mars_info = mongo.db.mars_info
+    mars_info = mongo.db.mars
     mars_data = scrape()
     mars_info.update(
         {},
